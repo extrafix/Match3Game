@@ -5,17 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-/**
- * Game — единое «пространство имён» для всех функций игры.
- *
- * Это единственный допустимый в курсе глобальный синглтон: класс выступает
- * хранилищем чистых функций, а не точкой связи между компонентами.
- * Предметные типы (Element, Board, BoardState, Match) остаются данными
- * без методов: вызываем {@code foo(obj)}, а не {@code obj.foo()}.
- *
- * В C# это {@code static partial class Game}. В Java нет partial-классов,
- * поэтому все функции собраны здесь, а конструктор закрыт.
- */
 public final class Game {
 
     private Game() {
@@ -39,10 +28,6 @@ public final class Game {
         System.out.println();
     }
 
-    // --- cloneBoard: глубокое копирование доски ---
-    // cells — ссылочный массив, поэтому поверхностной копии record недостаточно.
-    // Element иммутабелен, достаточно скопировать ссылки на фишки в новый массив.
-
     public static Board cloneBoard(Board board) {
         Element[][] cells = new Element[board.size()][board.size()];
         for (int row = 0; row < board.size(); row++) {
@@ -53,9 +38,6 @@ public final class Game {
         return new Board(board.size(), cells);
     }
 
-    // --- readMove: ввод хода и новое состояние ---
-    // Формат: "y x y1 x1" (как в курсе). "q" — выход.
-    // Исходная доска не меняется: работаем с клоном.
 
     public static BoardState readMove(BoardState bs) {
         System.out.println(">");
