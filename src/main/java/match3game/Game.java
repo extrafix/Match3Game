@@ -9,6 +9,13 @@ import java.util.Scanner;
 
 public final class Game {
 
+    public static BoardState initializeGame() {
+        BoardStatePipe filled = BoardStatePipe.empty()
+                                            .fillEmptySpaces()
+                                            .processCascade();
+        return filled.boardState();
+    }
+
     private Game() {
     }
 
@@ -85,13 +92,6 @@ public final class Game {
 
     private static boolean inBounds(Board board, int row, int col) {
         return row >= 0 && row < board.size() && col >= 0 && col < board.size();
-    }
-
-    public static BoardState initializeGame() {
-        BoardStatePipe filled = BoardStatePipe.empty()
-                                            .fillEmptySpaces()
-                                            .processCascade();
-        return filled.boardState();
     }
 
 }
